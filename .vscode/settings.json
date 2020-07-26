@@ -3,8 +3,11 @@
     "Contrasena",
     "N'catalog",
     "N'db",
+    "Shouldly",
+    "Xunit",
     "addrolemember",
     "nvarchar",
-    "sqlcmd"
+    "sqlcmd",
+    "sqlvolume"
   ]
 }

@@ -1,18 +1,23 @@
 # Catalogs.API
 
+## Runtime
+- Microsoft.AspNetCore.App 3.1.6
+- Microsoft.NETCore.App 3.1.6
+
 ## SQL Server
 ### First run
 ```bash
   docker pull mcr.microsoft.com/mssql/server:2017-latest;
 
-  docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=<SomeP4ssw0rd>" \
-   -p 1433:1433 --name sql1 \
-   -d \
-   mcr.microsoft.com/mssql/server:2017-latest
+  docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<SomeP4ssw0rd>' \
+   -p 1433:1433 \
+   --name sql-server17 \
+   -v sqlvolume:/var/opt/mssql \
+   -d mcr.microsoft.com/mssql/server:2017-latest
 ```
 ### Connect to instance
 ```bash
-  docker exec -it sql1 "bash";
+  docker exec -it sql-server17 "bash";
 
   /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P '<SomeP4ssw0rd>';
 
@@ -27,13 +32,15 @@
 ```
 ### Run/Stop container
 ```bash
-  docker stop sql1;
-  docker start sql1;
+  docker stop sql-server17;
+  docker start sql-server17;
 ```
-
-## EF Tools
+## EF/EF Tools
 ```bash
+  # Install EF Tools
   dotnet tool install --global dotnet-ef;
+  # If there are no migrations
   dotnet ef migrations add InitMigration;
+  # Update DB
   dotnet ef database update
 ```
