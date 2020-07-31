@@ -1,4 +1,7 @@
 using Catalog.API.Extensions;
+using Catalog.Domain.Extensions;
+using Catalog.Domain.Repositories;
+using Catalog.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +21,11 @@ namespace Catalog.API {
         .AddCatalogContext(
           Configuration.GetSection("DataSource:ConnectionString").Value
         )
-        .AddControllers();
+        .AddScoped<IItemRepository, ItemRepository>()
+        .AddMappers()
+        .AddServices()
+        .AddControllers()
+        .AddValidation();
     }
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure (IApplicationBuilder app, IWebHostEnvironment env) {
