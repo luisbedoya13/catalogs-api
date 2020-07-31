@@ -1,8 +1,9 @@
 using Catalog.Domain.Entities;
-using Catalog.Infrastructure.Tests.Extensions;
+using Catalog.Fixtures.Extensions;
+using Catalog.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
-namespace Catalog.Infrastructure.Tests {
+namespace Catalog.Fixtures {
   public class TestCatalogContext : CatalogContext {
     public TestCatalogContext (DbContextOptions<CatalogContext> options) : base(options) { }
     protected override void OnModelCreating (ModelBuilder modelBuilder) {
