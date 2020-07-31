@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.Infrastructure {
   public class CatalogContext : DbContext, IUnitOfWork {
-    public const string DEFAULT_SCHEMA = "catalog";
+    public const string DefaultSchema = "catalog";
     public DbSet<Item> Items { get; set; }
     public CatalogContext (DbContextOptions<CatalogContext> options) : base(options) { }
     protected override void OnModelCreating (ModelBuilder modelBuilder) {
@@ -16,9 +16,7 @@ namespace Catalog.Infrastructure {
       modelBuilder.ApplyConfiguration(new ArtistEntitySchemaConfiguration());
       base.OnModelCreating(modelBuilder);
     }
-    public async Task<bool> SaveEntitiesAsync (
-      CancellationToken cancellationToken = default(CancellationToken)
-    ) {
+    public async Task<bool> SaveEntitiesAsync (CancellationToken cancellationToken = default) {
       await SaveChangesAsync(cancellationToken);
       return true;
     }

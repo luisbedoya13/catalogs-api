@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Catalog.Infrastructure.SchemaDefinitions {
   public class ItemEntitySchemaDefinition : IEntityTypeConfiguration<Item> {
     public void Configure (EntityTypeBuilder<Item> builder) {
-      builder.ToTable("Items", CatalogContext.DEFAULT_SCHEMA);
+      builder.ToTable("Items", CatalogContext.DefaultSchema);
       builder.HasKey(k => k.Id);
       builder.Property(p => p.Name)
         .IsRequired();
